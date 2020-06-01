@@ -12,8 +12,8 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
                  destination: String,
                  contentLength: Int?,
                  contentType: String?,
-                 receipt: String?,
                  transaction: String?,
+                 receipt: String?,
                  additionalHeaders: Set<Header>?) {
         self.body = body
         self.headers = transform([.destination(path: destination)]) { headers in
@@ -37,8 +37,8 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
                   destination: destination,
                   contentLength: contentLength,
                   contentType: contentType,
-                  receipt: receipt,
                   transaction: transaction,
+                  receipt: receipt,
                   additionalHeaders: additionalHeaders)
     }
     
@@ -50,8 +50,8 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
                   destination: destination,
                   contentLength: nil,
                   contentType: nil,
-                  receipt: receipt,
                   transaction: transaction,
+                  receipt: receipt,
                   additionalHeaders: additionalHeaders)
         
     }

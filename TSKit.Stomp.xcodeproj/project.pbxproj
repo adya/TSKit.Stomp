@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002581CC248586DB00996809 /* AcknowledgeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581CB248586DB00996809 /* AcknowledgeFrame.swift */; };
+		002581CE2485876100996809 /* NotAcknowledgeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581CD2485876100996809 /* NotAcknowledgeFrame.swift */; };
 		00514DA924842D6C00E8459E /* StompVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00514DA824842D6C00E8459E /* StompVersion.swift */; };
 		00B281B62484362400BA087A /* SendFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B52484362400BA087A /* SendFrame.swift */; };
 		00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B724857F3C00BA087A /* SubscribeFrame.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		002581CB248586DB00996809 /* AcknowledgeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeFrame.swift; sourceTree = "<group>"; };
+		002581CD2485876100996809 /* NotAcknowledgeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAcknowledgeFrame.swift; sourceTree = "<group>"; };
 		00514DA824842D6C00E8459E /* StompVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompVersion.swift; sourceTree = "<group>"; };
 		00B281B52484362400BA087A /* SendFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFrame.swift; sourceTree = "<group>"; };
 		00B281B724857F3C00BA087A /* SubscribeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFrame.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				00B281B52484362400BA087A /* SendFrame.swift */,
 				00B281B724857F3C00BA087A /* SubscribeFrame.swift */,
 				00B281C42485851400BA087A /* UnsubscribeFrame.swift */,
+				002581CB248586DB00996809 /* AcknowledgeFrame.swift */,
+				002581CD2485876100996809 /* NotAcknowledgeFrame.swift */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -313,7 +319,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B281C52485851400BA087A /* UnsubscribeFrame.swift in Sources */,
 				00514DA924842D6C00E8459E /* StompVersion.swift in Sources */,
+				002581CC248586DB00996809 /* AcknowledgeFrame.swift in Sources */,
 				00F6812A2483D7B00026E9A2 /* Command.swift in Sources */,
 				00F68142248411C40026E9A2 /* String+OctetLength.swift in Sources */,
 				00F6814D248415A00026E9A2 /* ConnectFrame.swift in Sources */,

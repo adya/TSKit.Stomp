@@ -1,3 +1,5 @@
+import TSKit_Core
+
 struct SendFrame: AnyClientFrame, AnyPayloadFrame {
    
     let command: ClientCommand = .send
@@ -14,14 +16,14 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
                  transaction: String?,
                  additionalHeaders: Set<Header>?) {
         self.body = body
-        var headers: Set<Header> = [.destination(path: destination)]
-        if let body = body {
-            _ = headers.insert(.contentLength(length: contentLength ?? body.octetCount))
+        self.headers = transform([.destination(path: destination)]) { headers in
+            if let body = body {
+                _ = headers.insert(.contentLength(length: contentLength ?? body.octetCount))
+            }
+            _ = receipt.flatMap { headers.insert(.receipt($0)) }
+            _ = transaction.flatMap { headers.insert(.transaction($0)) }
+            (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
         }
-        _ = receipt.flatMap { headers.insert(.receipt($0)) }
-        _ = transaction.flatMap { headers.insert(.transaction($0)) }
-        (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
-        self.headers = headers
     }
     
     init(body: String,

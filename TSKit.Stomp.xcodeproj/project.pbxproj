@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		00514DA924842D6C00E8459E /* StompVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00514DA824842D6C00E8459E /* StompVersion.swift */; };
 		00B281B62484362400BA087A /* SendFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B52484362400BA087A /* SendFrame.swift */; };
+		00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B724857F3C00BA087A /* SubscribeFrame.swift */; };
+		00B281C1248580A400BA087A /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; };
+		00B281C2248580AB00BA087A /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; };
+		00B281C3248580B300BA087A /* TSKit_Core.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F681132483D62B0026E9A2 /* TSKit_Stomp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F681092483D62B0026E9A2 /* TSKit_Stomp.framework */; };
 		00F681182483D62B0026E9A2 /* TSKit_StompTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F681172483D62B0026E9A2 /* TSKit_StompTests.swift */; };
 		00F6811A2483D62B0026E9A2 /* TSKit_Stomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F6810C2483D62B0026E9A2 /* TSKit_Stomp.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +46,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				00B281C3248580B300BA087A /* TSKit_Core.framework in CopyFiles */,
 				00F6813B24840E990026E9A2 /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +56,8 @@
 /* Begin PBXFileReference section */
 		00514DA824842D6C00E8459E /* StompVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompVersion.swift; sourceTree = "<group>"; };
 		00B281B52484362400BA087A /* SendFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFrame.swift; sourceTree = "<group>"; };
+		00B281B724857F3C00BA087A /* SubscribeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFrame.swift; sourceTree = "<group>"; };
+		00B281C0248580A400BA087A /* TSKit_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TSKit_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F681092483D62B0026E9A2 /* TSKit_Stomp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSKit_Stomp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F6810C2483D62B0026E9A2 /* TSKit_Stomp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKit_Stomp.h; sourceTree = "<group>"; };
 		00F6810D2483D62B0026E9A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B281C1248580A400BA087A /* TSKit_Core.framework in Frameworks */,
 				00F68131248401130026E9A2 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B281C2248580AB00BA087A /* TSKit_Core.framework in Frameworks */,
 				00F6813824840DC90026E9A2 /* Starscream.framework in Frameworks */,
 				00F681132483D62B0026E9A2 /* TSKit_Stomp.framework in Frameworks */,
 			);
@@ -146,6 +155,7 @@
 		00F6812F248401130026E9A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00B281C0248580A400BA087A /* TSKit_Core.framework */,
 				00F68130248401130026E9A2 /* Starscream.framework */,
 			);
 			name = Frameworks;
@@ -156,6 +166,7 @@
 			children = (
 				00F6814C248415A00026E9A2 /* ConnectFrame.swift */,
 				00B281B52484362400BA087A /* SendFrame.swift */,
+				00B281B724857F3C00BA087A /* SubscribeFrame.swift */,
 			);
 			path = Frames;
 			sourceTree = "<group>";
@@ -297,6 +308,7 @@
 				00F6814D248415A00026E9A2 /* ConnectFrame.swift in Sources */,
 				00F6814B248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift in Sources */,
 				00F68147248414410026E9A2 /* AnyFrameFragmentConvertible.swift in Sources */,
+				00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */,
 				00F68135248403DD0026E9A2 /* Header.swift in Sources */,
 				00B281B62484362400BA087A /* SendFrame.swift in Sources */,
 				00F68145248412240026E9A2 /* AnyFrame.swift in Sources */,

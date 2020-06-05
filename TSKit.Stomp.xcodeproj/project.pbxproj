@@ -12,6 +12,11 @@
 		002581D02485883300996809 /* BeginFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581CF2485883300996809 /* BeginFrame.swift */; };
 		002581D22485887D00996809 /* CommitFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581D12485887D00996809 /* CommitFrame.swift */; };
 		002581D42485889300996809 /* AbortFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581D32485889300996809 /* AbortFrame.swift */; };
+		002581D62485896D00996809 /* DisconnectFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581D52485896D00996809 /* DisconnectFrame.swift */; };
+		002581D9248A585100996809 /* ConnectedFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581D8248A582900996809 /* ConnectedFrame.swift */; };
+		002581DB248A93DD00996809 /* ReceiptFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DA248A93DD00996809 /* ReceiptFrame.swift */; };
+		002581DD248A940A00996809 /* MessageFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DC248A940A00996809 /* MessageFrame.swift */; };
+		002581DF248A945000996809 /* ErrorFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DE248A945000996809 /* ErrorFrame.swift */; };
 		00514DA924842D6C00E8459E /* StompVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00514DA824842D6C00E8459E /* StompVersion.swift */; };
 		00B281B62484362400BA087A /* SendFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B52484362400BA087A /* SendFrame.swift */; };
 		00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B724857F3C00BA087A /* SubscribeFrame.swift */; };
@@ -30,8 +35,6 @@
 		00F6813B24840E990026E9A2 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00F68130248401130026E9A2 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F68142248411C40026E9A2 /* String+OctetLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F68141248411C40026E9A2 /* String+OctetLength.swift */; };
 		00F68145248412240026E9A2 /* AnyFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F68144248412240026E9A2 /* AnyFrame.swift */; };
-		00F68147248414410026E9A2 /* AnyFrameFragmentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F68146248414410026E9A2 /* AnyFrameFragmentConvertible.swift */; };
-		00F6814B248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6814A248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift */; };
 		00F6814D248415A00026E9A2 /* ConnectFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6814C248415A00026E9A2 /* ConnectFrame.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,11 @@
 		002581CF2485883300996809 /* BeginFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginFrame.swift; sourceTree = "<group>"; };
 		002581D12485887D00996809 /* CommitFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitFrame.swift; sourceTree = "<group>"; };
 		002581D32485889300996809 /* AbortFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbortFrame.swift; sourceTree = "<group>"; };
+		002581D52485896D00996809 /* DisconnectFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectFrame.swift; sourceTree = "<group>"; };
+		002581D8248A582900996809 /* ConnectedFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedFrame.swift; sourceTree = "<group>"; };
+		002581DA248A93DD00996809 /* ReceiptFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFrame.swift; sourceTree = "<group>"; };
+		002581DC248A940A00996809 /* MessageFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFrame.swift; sourceTree = "<group>"; };
+		002581DE248A945000996809 /* ErrorFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFrame.swift; sourceTree = "<group>"; };
 		00514DA824842D6C00E8459E /* StompVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompVersion.swift; sourceTree = "<group>"; };
 		00B281B52484362400BA087A /* SendFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFrame.swift; sourceTree = "<group>"; };
 		00B281B724857F3C00BA087A /* SubscribeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFrame.swift; sourceTree = "<group>"; };
@@ -84,8 +92,6 @@
 		00F68134248403DD0026E9A2 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		00F68141248411C40026E9A2 /* String+OctetLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+OctetLength.swift"; sourceTree = "<group>"; };
 		00F68144248412240026E9A2 /* AnyFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFrame.swift; sourceTree = "<group>"; };
-		00F68146248414410026E9A2 /* AnyFrameFragmentConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFrameFragmentConvertible.swift; sourceTree = "<group>"; };
-		00F6814A248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+AnyFrameFragmentConvertible.swift"; sourceTree = "<group>"; };
 		00F6814C248415A00026E9A2 /* ConnectFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFrame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,10 +118,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002581D7248A57F900996809 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				002581D8248A582900996809 /* ConnectedFrame.swift */,
+				002581DA248A93DD00996809 /* ReceiptFrame.swift */,
+				002581DC248A940A00996809 /* MessageFrame.swift */,
+				002581DE248A945000996809 /* ErrorFrame.swift */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
 		00B281C62485851D00BA087A /* Client */ = {
 			isa = PBXGroup;
 			children = (
 				00F6814C248415A00026E9A2 /* ConnectFrame.swift */,
+				002581D52485896D00996809 /* DisconnectFrame.swift */,
 				00B281B52484362400BA087A /* SendFrame.swift */,
 				00B281B724857F3C00BA087A /* SubscribeFrame.swift */,
 				00B281C42485851400BA087A /* UnsubscribeFrame.swift */,
@@ -194,6 +212,7 @@
 			children = (
 				00F68144248412240026E9A2 /* AnyFrame.swift */,
 				00B281C62485851D00BA087A /* Client */,
+				002581D7248A57F900996809 /* Server */,
 			);
 			path = Frames;
 			sourceTree = "<group>";
@@ -201,7 +220,6 @@
 		00F68148248415380026E9A2 /* Fragments */ = {
 			isa = PBXGroup;
 			children = (
-				00F68146248414410026E9A2 /* AnyFrameFragmentConvertible.swift */,
 				00F681292483D7B00026E9A2 /* Command.swift */,
 				00F68134248403DD0026E9A2 /* Header.swift */,
 			);
@@ -212,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				00F68141248411C40026E9A2 /* String+OctetLength.swift */,
-				00F6814A248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -330,18 +347,21 @@
 			files = (
 				002581D22485887D00996809 /* CommitFrame.swift in Sources */,
 				00B281C52485851400BA087A /* UnsubscribeFrame.swift in Sources */,
+				002581DD248A940A00996809 /* MessageFrame.swift in Sources */,
+				002581D9248A585100996809 /* ConnectedFrame.swift in Sources */,
 				00514DA924842D6C00E8459E /* StompVersion.swift in Sources */,
 				002581CC248586DB00996809 /* AcknowledgeFrame.swift in Sources */,
 				00F6812A2483D7B00026E9A2 /* Command.swift in Sources */,
 				00F68142248411C40026E9A2 /* String+OctetLength.swift in Sources */,
 				00F6814D248415A00026E9A2 /* ConnectFrame.swift in Sources */,
-				00F6814B248415680026E9A2 /* Set+AnyFrameFragmentConvertible.swift in Sources */,
-				00F68147248414410026E9A2 /* AnyFrameFragmentConvertible.swift in Sources */,
+				002581D62485896D00996809 /* DisconnectFrame.swift in Sources */,
 				00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */,
 				002581D02485883300996809 /* BeginFrame.swift in Sources */,
+				002581DF248A945000996809 /* ErrorFrame.swift in Sources */,
 				00F68135248403DD0026E9A2 /* Header.swift in Sources */,
 				00B281B62484362400BA087A /* SendFrame.swift in Sources */,
 				00F68145248412240026E9A2 /* AnyFrame.swift in Sources */,
+				002581DB248A93DD00996809 /* ReceiptFrame.swift in Sources */,
 				002581CE2485876100996809 /* NotAcknowledgeFrame.swift in Sources */,
 				002581D42485889300996809 /* AbortFrame.swift in Sources */,
 				00F6812E2483DC420026E9A2 /* Client.swift in Sources */,

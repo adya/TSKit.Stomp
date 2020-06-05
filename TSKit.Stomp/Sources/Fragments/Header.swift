@@ -1,5 +1,5 @@
-enum Header: Hashable, AnyFrameFragmentConvertible {
-    
+enum Header: Hashable, CustomStringConvertible, Codable {
+   
     case acceptVersion(_ versions: [String])
     
     case heartBeat(outgoingInterval: Int, expectedInterval: Int)
@@ -27,7 +27,7 @@ enum Header: Hashable, AnyFrameFragmentConvertible {
     
     case custom(key: String, value: String)
     
-    public var fragment: String { "\(key):\(value)" }
+    public var description: String { "\(key):\(value)" }
     
     var key: String {
         switch self {
@@ -52,6 +52,76 @@ enum Header: Hashable, AnyFrameFragmentConvertible {
             case .message: return StompHeaders.message.rawValue
             case .custom(let key, _): return key
         }
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let fragment = try container.decode(String.self)
+        var components = fragment.components(separatedBy: ":")
+        guard components.count > 1 else { throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid header format \(fragment)") }
+        
+        let key = components.removeFirst()
+        let value = components.joined(separator: "")
+        
+        if let stomp = StompHeaders(rawValue: key) {
+            switch stomp {
+                case .contentLength:
+                    guard let length = Int(value) else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Expected Int value for length")
+                    }
+                    self = .contentLength(length: length)
+                case .contentType:
+                    self = .contentType(type: value)
+                case .receipt:
+                    self = .receipt(value)
+                case .acceptVersion:
+                    self = .acceptVersion(value.components(separatedBy: ","))
+                case .host:
+                    self = .host(value)
+                case .login:
+                    self = .login(value)
+                case .passcode:
+                    self = .passcode(value)
+                case .heartBeat:
+                    let bits = value.components(separatedBy: ",").compactMap({ Int($0) })
+                    guard bits.count == 2 else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unexpected format for heartBeat: \(fragment)")
+                    }
+                    self = .heartBeat(outgoingInterval: bits.first!, expectedInterval: bits.last!)
+                case .version:
+                    self = .version(version: value)
+                case .id:
+                    self = .id(value)
+                case .session:
+                    self = .session(value)
+                case .server:
+                    self = .server(value)
+                case .destination:
+                    self = .destination(path: value)
+                case .transaction:
+                    self = .transaction(value)
+                case .ack:
+                    guard let acknowledge = Acknowledge(rawValue: value) else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid value for acknowledgement mode")
+                    }
+                    self = .ack(acknowledge)
+                case .subscription:
+                    self = .subscription(subId: value)
+                case .messageId:
+                    self = .messageId(id: value)
+                case .receiptId:
+                    self = .receiptId(value)
+                case .message:
+                    self = .message(message: value)
+            }
+        } else {
+            self = .custom(key: key, value: value)
+        }
+    }
+       
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
     }
     
     var value: String {

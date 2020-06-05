@@ -1,6 +1,6 @@
 /// List of  valid server commands as of STOMP 1.2
-enum ServerCommand: AnyFrameFragmentConvertible {
-    
+enum ServerCommand: CustomStringConvertible, Decodable {
+   
     case connected
     case message
     case receipt
@@ -8,19 +8,36 @@ enum ServerCommand: AnyFrameFragmentConvertible {
     
     case custom(String)
     
-    var fragment: String {
+    var description: String {
         switch self {
-            case .connected: return StompCommand.connected.fragment
-            case .message: return StompCommand.message.fragment
-            case .receipt: return StompCommand.receipt.fragment
-            case .error: return StompCommand.error.fragment
+            case .connected: return StompCommand.connected.description
+            case .message: return StompCommand.message.description
+            case .receipt: return StompCommand.receipt.description
+            case .error: return StompCommand.error.description
             case .custom(let command): return command.uppercased()
+        }
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let fragment = try container.decode(String.self)
+        
+        if let stomp = StompCommand(rawValue: fragment) {
+            switch stomp {
+                case .connected: self = .connected
+                case .message: self = .message
+                case .receipt: self = .receipt
+                case .error: self = .error
+                default: throw DecodingError.dataCorruptedError(in: container, debugDescription: "Recevied not server-side StompCommand '\(fragment)'")
+            }
+        } else {
+            self = .custom(fragment)
         }
     }
 }
 
 /// List of  valid client commands as of STOMP 1.2
-enum ClientCommand: AnyFrameFragmentConvertible {
+enum ClientCommand: CustomStringConvertible, Encodable {
     
     case connect
     case stomp
@@ -39,26 +56,31 @@ enum ClientCommand: AnyFrameFragmentConvertible {
     
     case custom(String)
     
-    var fragment: String {
+    var description: String {
         switch self {
-            case .connect: return StompCommand.connect.fragment
-            case .stomp: return StompCommand.stomp.fragment
-            case .disconnect: return StompCommand.disconnect.fragment
-            case .send: return StompCommand.send.fragment
-            case .subscribe: return StompCommand.subscribe.fragment
-            case .unsubscribe: return StompCommand.unsubscribe.fragment
-            case .begin: return StompCommand.begin.fragment
-            case .commit: return StompCommand.commit.fragment
-            case .abort: return StompCommand.abort.fragment
-            case .ack: return StompCommand.ack.fragment
-            case .nack: return StompCommand.nack.fragment
+            case .connect: return StompCommand.connect.description
+            case .stomp: return StompCommand.stomp.description
+            case .disconnect: return StompCommand.disconnect.description
+            case .send: return StompCommand.send.description
+            case .subscribe: return StompCommand.subscribe.description
+            case .unsubscribe: return StompCommand.unsubscribe.description
+            case .begin: return StompCommand.begin.description
+            case .commit: return StompCommand.commit.description
+            case .abort: return StompCommand.abort.description
+            case .ack: return StompCommand.ack.description
+            case .nack: return StompCommand.nack.description
             case .custom(let command): return command.uppercased()
         }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
     }
 }
 
 /// List of all valid commands as of STOMP 1.2
-private enum StompCommand: String, AnyFrameFragmentConvertible {
+private enum StompCommand: String, CustomStringConvertible {
     
     case connected
     case message
@@ -76,7 +98,7 @@ private enum StompCommand: String, AnyFrameFragmentConvertible {
     case ack
     case nack
     
-    var fragment: String {
+    var description: String {
         rawValue.uppercased()
     }
 }

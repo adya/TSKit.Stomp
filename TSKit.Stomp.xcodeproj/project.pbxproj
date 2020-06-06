@@ -17,7 +17,11 @@
 		002581DB248A93DD00996809 /* ReceiptFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DA248A93DD00996809 /* ReceiptFrame.swift */; };
 		002581DD248A940A00996809 /* MessageFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DC248A940A00996809 /* MessageFrame.swift */; };
 		002581DF248A945000996809 /* ErrorFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581DE248A945000996809 /* ErrorFrame.swift */; };
-		00514DA924842D6C00E8459E /* StompVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00514DA824842D6C00E8459E /* StompVersion.swift */; };
+		002581E7248BC4AC00996809 /* StompEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581E6248BC4AC00996809 /* StompEncoder.swift */; };
+		002581E9248BDE6B00996809 /* CustomServerFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581E8248BDE6B00996809 /* CustomServerFrame.swift */; };
+		002581EB248BDFEC00996809 /* StompDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581EA248BDFEC00996809 /* StompDecoder.swift */; };
+		002581ED248BE00900996809 /* RawFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581EC248BE00900996809 /* RawFrame.swift */; };
+		002581F0248BE88F00996809 /* Stomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581EE248BE78600996809 /* Stomp.swift */; };
 		00B281B62484362400BA087A /* SendFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B52484362400BA087A /* SendFrame.swift */; };
 		00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B724857F3C00BA087A /* SubscribeFrame.swift */; };
 		00B281C1248580A400BA087A /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; };
@@ -25,7 +29,7 @@
 		00B281C3248580B300BA087A /* TSKit_Core.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00B281C52485851400BA087A /* UnsubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281C42485851400BA087A /* UnsubscribeFrame.swift */; };
 		00F681132483D62B0026E9A2 /* TSKit_Stomp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F681092483D62B0026E9A2 /* TSKit_Stomp.framework */; };
-		00F681182483D62B0026E9A2 /* TSKit_StompTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F681172483D62B0026E9A2 /* TSKit_StompTests.swift */; };
+		00F681182483D62B0026E9A2 /* StompEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F681172483D62B0026E9A2 /* StompEncoderTests.swift */; };
 		00F6811A2483D62B0026E9A2 /* TSKit_Stomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F6810C2483D62B0026E9A2 /* TSKit_Stomp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		00F6812A2483D7B00026E9A2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F681292483D7B00026E9A2 /* Command.swift */; };
 		00F6812E2483DC420026E9A2 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6812D2483DC420026E9A2 /* Client.swift */; };
@@ -73,7 +77,11 @@
 		002581DA248A93DD00996809 /* ReceiptFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFrame.swift; sourceTree = "<group>"; };
 		002581DC248A940A00996809 /* MessageFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFrame.swift; sourceTree = "<group>"; };
 		002581DE248A945000996809 /* ErrorFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFrame.swift; sourceTree = "<group>"; };
-		00514DA824842D6C00E8459E /* StompVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompVersion.swift; sourceTree = "<group>"; };
+		002581E6248BC4AC00996809 /* StompEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEncoder.swift; sourceTree = "<group>"; };
+		002581E8248BDE6B00996809 /* CustomServerFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomServerFrame.swift; sourceTree = "<group>"; };
+		002581EA248BDFEC00996809 /* StompDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompDecoder.swift; sourceTree = "<group>"; };
+		002581EC248BE00900996809 /* RawFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawFrame.swift; sourceTree = "<group>"; };
+		002581EE248BE78600996809 /* Stomp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stomp.swift; sourceTree = "<group>"; };
 		00B281B52484362400BA087A /* SendFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFrame.swift; sourceTree = "<group>"; };
 		00B281B724857F3C00BA087A /* SubscribeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFrame.swift; sourceTree = "<group>"; };
 		00B281C0248580A400BA087A /* TSKit_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TSKit_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +90,7 @@
 		00F6810C2483D62B0026E9A2 /* TSKit_Stomp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKit_Stomp.h; sourceTree = "<group>"; };
 		00F6810D2483D62B0026E9A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F681122483D62B0026E9A2 /* TSKit.StompTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TSKit.StompTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00F681172483D62B0026E9A2 /* TSKit_StompTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSKit_StompTests.swift; sourceTree = "<group>"; };
+		00F681172483D62B0026E9A2 /* StompEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEncoderTests.swift; sourceTree = "<group>"; };
 		00F681192483D62B0026E9A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F681252483D7240026E9A2 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
 		00F681262483D7240026E9A2 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
@@ -125,8 +133,19 @@
 				002581DA248A93DD00996809 /* ReceiptFrame.swift */,
 				002581DC248A940A00996809 /* MessageFrame.swift */,
 				002581DE248A945000996809 /* ErrorFrame.swift */,
+				002581E8248BDE6B00996809 /* CustomServerFrame.swift */,
 			);
 			name = Server;
+			sourceTree = "<group>";
+		};
+		002581E5248BC49800996809 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				002581E6248BC4AC00996809 /* StompEncoder.swift */,
+				002581EA248BDFEC00996809 /* StompDecoder.swift */,
+				002581EC248BE00900996809 /* RawFrame.swift */,
+			);
+			path = Serialization;
 			sourceTree = "<group>";
 		};
 		00B281C62485851D00BA087A /* Client */ = {
@@ -171,7 +190,6 @@
 				00F681232483D64C0026E9A2 /* Sources */,
 				00F6810C2483D62B0026E9A2 /* TSKit_Stomp.h */,
 				00F681262483D7240026E9A2 /* Cartfile */,
-				00514DA824842D6C00E8459E /* StompVersion.swift */,
 				00F681252483D7240026E9A2 /* Cartfile.resolved */,
 				00F6810D2483D62B0026E9A2 /* Info.plist */,
 			);
@@ -181,7 +199,7 @@
 		00F681162483D62B0026E9A2 /* TSKit.StompTests */ = {
 			isa = PBXGroup;
 			children = (
-				00F681172483D62B0026E9A2 /* TSKit_StompTests.swift */,
+				00F681172483D62B0026E9A2 /* StompEncoderTests.swift */,
 				00F681192483D62B0026E9A2 /* Info.plist */,
 			);
 			path = TSKit.StompTests;
@@ -190,6 +208,8 @@
 		00F681232483D64C0026E9A2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				002581EE248BE78600996809 /* Stomp.swift */,
+				002581E5248BC49800996809 /* Serialization */,
 				00F681492484154C0026E9A2 /* Extensions */,
 				00F68148248415380026E9A2 /* Fragments */,
 				00F68143248412160026E9A2 /* Frames */,
@@ -349,10 +369,13 @@
 				00B281C52485851400BA087A /* UnsubscribeFrame.swift in Sources */,
 				002581DD248A940A00996809 /* MessageFrame.swift in Sources */,
 				002581D9248A585100996809 /* ConnectedFrame.swift in Sources */,
-				00514DA924842D6C00E8459E /* StompVersion.swift in Sources */,
+				002581E7248BC4AC00996809 /* StompEncoder.swift in Sources */,
+				002581ED248BE00900996809 /* RawFrame.swift in Sources */,
 				002581CC248586DB00996809 /* AcknowledgeFrame.swift in Sources */,
 				00F6812A2483D7B00026E9A2 /* Command.swift in Sources */,
 				00F68142248411C40026E9A2 /* String+OctetLength.swift in Sources */,
+				002581F0248BE88F00996809 /* Stomp.swift in Sources */,
+				002581EB248BDFEC00996809 /* StompDecoder.swift in Sources */,
 				00F6814D248415A00026E9A2 /* ConnectFrame.swift in Sources */,
 				002581D62485896D00996809 /* DisconnectFrame.swift in Sources */,
 				00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */,
@@ -365,6 +388,7 @@
 				002581CE2485876100996809 /* NotAcknowledgeFrame.swift in Sources */,
 				002581D42485889300996809 /* AbortFrame.swift in Sources */,
 				00F6812E2483DC420026E9A2 /* Client.swift in Sources */,
+				002581E9248BDE6B00996809 /* CustomServerFrame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F681182483D62B0026E9A2 /* TSKit_StompTests.swift in Sources */,
+				00F681182483D62B0026E9A2 /* StompEncoderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

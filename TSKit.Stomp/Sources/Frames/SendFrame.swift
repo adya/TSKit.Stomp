@@ -20,6 +20,7 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
             if let body = body {
                 _ = headers.insert(.contentLength(length: contentLength ?? body.octetCount))
             }
+            _ = contentType.flatMap { headers.insert(.contentType(type: $0)) }
             _ = receipt.flatMap { headers.insert(.receipt($0)) }
             _ = transaction.flatMap { headers.insert(.transaction($0)) }
             (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }

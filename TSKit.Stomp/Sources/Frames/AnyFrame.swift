@@ -3,12 +3,12 @@ protocol AnyFrame {
     var headers: Set<Header> { get }
 }
 
-protocol AnyClientFrame: AnyFrame, Encodable {
+protocol AnyClientFrame: AnyFrame {
     
     var command: ClientCommand { get }
 }
 
-protocol AnyServerFrame: AnyFrame, Decodable {
+protocol AnyServerFrame: AnyFrame {
     
     var command: ServerCommand { get }
 }

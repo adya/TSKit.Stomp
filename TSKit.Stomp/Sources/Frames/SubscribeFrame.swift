@@ -8,7 +8,7 @@ struct SubscribeFrame: AnyClientFrame {
     
     init(destination: String,
          id: String,
-         acknowledge: Acknowledge? = nil,
+         acknowledge: Stomp.Acknowledge? = nil,
          receipt: String? = nil,
          additionalHeaders: Set<Header>? = nil) {
         self.headers = transform([.destination(path: destination),

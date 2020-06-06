@@ -1,5 +1,5 @@
-/// List of  valid server commands as of STOMP 1.2
-enum ServerCommand: CustomStringConvertible, Decodable {
+/// Commands that can be received from server.
+enum ServerCommand: CustomStringConvertible {
    
     case connected
     case message
@@ -10,34 +10,17 @@ enum ServerCommand: CustomStringConvertible, Decodable {
     
     var description: String {
         switch self {
-            case .connected: return StompCommand.connected.description
-            case .message: return StompCommand.message.description
-            case .receipt: return StompCommand.receipt.description
-            case .error: return StompCommand.error.description
+            case .connected: return String(describing: Stomp.ServerCommand.connected)
+            case .message: return String(describing: Stomp.ServerCommand.message)
+            case .receipt: return String(describing: Stomp.ServerCommand.receipt)
+            case .error: return String(describing: Stomp.ServerCommand.error)
             case .custom(let command): return command.uppercased()
-        }
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let fragment = try container.decode(String.self)
-        
-        if let stomp = StompCommand(rawValue: fragment) {
-            switch stomp {
-                case .connected: self = .connected
-                case .message: self = .message
-                case .receipt: self = .receipt
-                case .error: self = .error
-                default: throw DecodingError.dataCorruptedError(in: container, debugDescription: "Recevied not server-side StompCommand '\(fragment)'")
-            }
-        } else {
-            self = .custom(fragment)
         }
     }
 }
 
-/// List of  valid client commands as of STOMP 1.2
-enum ClientCommand: CustomStringConvertible, Encodable {
+/// Commands that can be sent to server.
+enum ClientCommand: CustomStringConvertible {
     
     case connect
     case stomp
@@ -58,47 +41,18 @@ enum ClientCommand: CustomStringConvertible, Encodable {
     
     var description: String {
         switch self {
-            case .connect: return StompCommand.connect.description
-            case .stomp: return StompCommand.stomp.description
-            case .disconnect: return StompCommand.disconnect.description
-            case .send: return StompCommand.send.description
-            case .subscribe: return StompCommand.subscribe.description
-            case .unsubscribe: return StompCommand.unsubscribe.description
-            case .begin: return StompCommand.begin.description
-            case .commit: return StompCommand.commit.description
-            case .abort: return StompCommand.abort.description
-            case .ack: return StompCommand.ack.description
-            case .nack: return StompCommand.nack.description
+            case .connect: return String(describing: Stomp.ClientCommand.connect)
+            case .stomp: return String(describing: Stomp.ClientCommand.stomp)
+            case .disconnect: return String(describing: Stomp.ClientCommand.disconnect)
+            case .send: return String(describing: Stomp.ClientCommand.send)
+            case .subscribe: return String(describing: Stomp.ClientCommand.subscribe)
+            case .unsubscribe: return String(describing: Stomp.ClientCommand.unsubscribe)
+            case .begin: return String(describing: Stomp.ClientCommand.begin)
+            case .commit: return String(describing: Stomp.ClientCommand.commit)
+            case .abort: return String(describing: Stomp.ClientCommand.abort)
+            case .ack: return String(describing: Stomp.ClientCommand.ack)
+            case .nack: return String(describing: Stomp.ClientCommand.nack)
             case .custom(let command): return command.uppercased()
         }
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(description)
-    }
-}
-
-/// List of all valid commands as of STOMP 1.2
-private enum StompCommand: String, CustomStringConvertible {
-    
-    case connected
-    case message
-    case receipt
-    case error
-    case connect
-    case stomp
-    case disconnect
-    case send
-    case subscribe
-    case unsubscribe
-    case begin
-    case commit
-    case abort
-    case ack
-    case nack
-    
-    var description: String {
-        rawValue.uppercased()
     }
 }

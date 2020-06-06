@@ -4,13 +4,13 @@ struct DisconnectFrame: AnyClientFrame {
     
     let command: ClientCommand = .disconnect
     
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     init(receipt: String? = nil,
-         additionalHeaders: Set<Header>? = nil) {
-        self.headers = transform([]) { headers in
-            _ = receipt.flatMap { headers.insert(.receipt($0)) }
-            (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
+         additionalHeaders: HeaderSet? = nil) {
+        self.headers = transform(HeaderSet()) { headers in
+            headers.receipt = receipt
+            additionalHeaders.flatMap { headers.formUnion($0) }
         }
     }
 }

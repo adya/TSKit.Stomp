@@ -10,12 +10,20 @@ final class StompDecoder {
         
         let command = try ServerCommand(rawValue: components.removeFirst())
         
-        var headers: Set<Header> = []
+        var headers = HeaderSet()
         while !components.isEmpty, !components.first!.isEmpty {
-            let header = try Header(rawValue: components.removeFirst())
-            if !headers.contains(header) {
-                headers.insert(header)
+            guard let rawHeader = RawHeader(rawValue: components.removeFirst()) else {
+                throw StompDecodingError.malformedHeader
             }
+            
+            if let header = Stomp.Header(rawValue: rawHeader.name) {
+                if !headers.contains(header) {
+                    headers.set(rawHeader.value, for: header)
+                }
+            } else {
+                headers.set(rawHeader.value, forHeaderNamed: rawHeader.name)
+            }
+            
         }
         
         let body = components.nonEmpty?.joined(separator: "\n")
@@ -50,68 +58,6 @@ extension ServerCommand {
             }
         } else {
             self = .custom(rawValue)
-        }
-    }
-}
-
-extension Header {
-    
-    init(rawValue: String) throws {
-        var components = rawValue.components(separatedBy: ":")
-        guard components.count > 1 else {
-            throw StompDecodingError.malformedHeader
-        }
-        
-        let key = components.removeFirst()
-        let value = components.joined(separator: "")
-        
-        if let stomp = Stomp.Header(rawValue: key) {
-            switch stomp {
-                case .contentLength:
-                    guard let length = Int(value) else { throw StompDecodingError.malformedHeader }
-                    self = .contentLength(length: length)
-                case .contentType:
-                    self = .contentType(type: value)
-                case .receipt:
-                    self = .receipt(value)
-                case .acceptVersion:
-                    self = .acceptVersion(value.components(separatedBy: ","))
-                case .host:
-                    self = .host(value)
-                case .login:
-                    self = .login(value)
-                case .passcode:
-                    self = .passcode(value)
-                case .heartBeat:
-                    let bits = value.components(separatedBy: ",").compactMap({ UInt($0) })
-                    guard bits.count == 2 else { throw StompDecodingError.malformedHeader }
-                    self = .heartBeat(.init(expected: bits.first!, guaranteed: bits.last!))
-                case .version:
-                    self = .version(version: value)
-                case .id:
-                    self = .id(value)
-                case .session:
-                    self = .session(value)
-                case .server:
-                    self = .server(value)
-                case .destination:
-                    self = .destination(path: value)
-                case .transaction:
-                    self = .transaction(value)
-                case .ack:
-                    guard let acknowledge = Stomp.Acknowledge(rawValue: value) else { throw StompDecodingError.malformedHeader }
-                    self = .ack(acknowledge)
-                case .subscription:
-                    self = .subscription(subId: value)
-                case .messageId:
-                    self = .messageId(id: value)
-                case .receiptId:
-                    self = .receiptId(value)
-                case .message:
-                    self = .message(message: value)
-            }
-        } else {
-            self = .custom(key: key, value: value)
         }
     }
 }

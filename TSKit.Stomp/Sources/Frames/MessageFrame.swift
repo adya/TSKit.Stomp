@@ -10,7 +10,7 @@ struct MessageFrame: AnyServerFrame, AnyPayloadFrame {
     /// - subscription
     /// Optional:
     /// - ack
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     let body: String?
 }

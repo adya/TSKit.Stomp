@@ -4,14 +4,18 @@ struct CommitFrame: AnyClientFrame {
     
     let command: ClientCommand = .commit
     
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     init(transaction: String,
          receipt: String? = nil,
-         additionalHeaders: Set<Header>? = nil) {
-        self.headers = transform([.transaction(transaction)]) { headers in
-            _ = receipt.flatMap { headers.insert(.receipt($0)) }
-            (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
+         additionalHeaders: HeaderSet? = nil) {
+        
+        self.headers = transform(HeaderSet()) { headers in
+            headers.transaction = transaction
+            headers.receipt = receipt
+            additionalHeaders?.customHeaders.forEach {
+                headers.set($0.1, forHeaderNamed: $0.0)
+            }
         }
     }
 }

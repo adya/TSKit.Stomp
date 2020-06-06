@@ -1,6 +1,6 @@
 protocol AnyFrame {
     
-    var headers: Set<Header> { get }
+    var headers: HeaderSet { get }
 }
 
 protocol AnyClientFrame: AnyFrame {

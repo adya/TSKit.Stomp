@@ -4,7 +4,7 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
    
     let command: ClientCommand = .send
     
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     let body: String?
     
@@ -14,16 +14,17 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
                  contentType: String?,
                  transaction: String?,
                  receipt: String?,
-                 additionalHeaders: Set<Header>?) {
+                 additionalHeaders: HeaderSet?) {
         self.body = body
-        self.headers = transform([.destination(path: destination)]) { headers in
+        self.headers = transform(HeaderSet()) { headers in
             if let body = body {
-                _ = headers.insert(.contentLength(length: contentLength ?? body.octetCount))
+                headers.contentLength = contentLength ?? body.octetCount
             }
-            _ = contentType.flatMap { headers.insert(.contentType(type: $0)) }
-            _ = receipt.flatMap { headers.insert(.receipt($0)) }
-            _ = transaction.flatMap { headers.insert(.transaction($0)) }
-            (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
+            headers.destination = destination
+            headers.contentType = contentType
+            headers.receipt = receipt
+            headers.transaction = transaction
+            additionalHeaders.flatMap { headers.formUnion($0) }
         }
     }
     
@@ -33,7 +34,7 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
          contentType: String? = nil,
          receipt: String? = nil,
          transaction: String? = nil,
-         additionalHeaders: Set<Header>? = nil) {
+         additionalHeaders: HeaderSet? = nil) {
         self.init(bodyOrNil: body,
                   destination: destination,
                   contentLength: contentLength,
@@ -46,7 +47,7 @@ struct SendFrame: AnyClientFrame, AnyPayloadFrame {
     init(destination: String,
          receipt: String? = nil,
          transaction: String? = nil,
-         additionalHeaders: Set<Header>? = nil) {
+         additionalHeaders: HeaderSet? = nil) {
         self.init(bodyOrNil: nil,
                   destination: destination,
                   contentLength: nil,

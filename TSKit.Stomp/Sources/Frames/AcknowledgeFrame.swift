@@ -6,16 +6,17 @@ struct AcknowledgeFrame: AnyClientFrame {
     
     let command: ClientCommand = .ack
     
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     init(id: String,
          transaction: String? = nil,
          receipt: String? = nil,
-         additionalHeaders: Set<Header>? = nil) {
-        self.headers = transform([.id(id)]) { headers in
-            _ = transaction.flatMap { headers.insert(.transaction($0)) }
-            _ = receipt.flatMap { headers.insert(.receipt($0)) }
-            (additionalHeaders?.subtracting(headers)).flatMap { headers.formUnion($0) }
+         additionalHeaders: HeaderSet? = nil) {
+        self.headers = transform(HeaderSet()) { headers in
+            headers.id = id
+            headers.transaction = transaction
+            headers.receipt = receipt
+            additionalHeaders.flatMap { headers.formUnion($0) }
         }
     }
 }

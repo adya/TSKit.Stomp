@@ -4,5 +4,5 @@ struct ErrorFrame: AnyServerFrame {
     
     /// Optional:
     /// - message
-    let headers: Set<Header>
+    let headers: HeaderSet
 }

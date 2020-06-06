@@ -4,5 +4,5 @@ struct ReceiptFrame: AnyServerFrame {
     
     /// Required:
     /// - receipt-id
-    let headers: Set<Header>
+    let headers: HeaderSet
 }

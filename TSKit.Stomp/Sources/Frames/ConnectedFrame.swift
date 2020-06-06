@@ -8,5 +8,5 @@ struct ConnectedFrame: AnyServerFrame {
     /// - server
     /// - heart-beat
     /// - session
-    let headers: Set<Header>
+    let headers: HeaderSet
 }

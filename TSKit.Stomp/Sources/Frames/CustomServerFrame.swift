@@ -4,11 +4,11 @@ struct CustomServerFrame: AnyServerFrame, AnyPayloadFrame {
     
     let command: ServerCommand
     
-    let headers: Set<Header>
+    let headers: HeaderSet
     
     let body: String?
     
-    init(command: String, headers: Set<Header>, body: String? = nil) {
+    init(command: String, headers: HeaderSet, body: String? = nil) {
         self.command = .custom(command.uppercased())
         self.headers = headers
         self.body = body

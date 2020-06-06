@@ -24,6 +24,8 @@
 		002581F0248BE88F00996809 /* Stomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581EE248BE78600996809 /* Stomp.swift */; };
 		002581F4248BECC500996809 /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581F3248BECC400996809 /* HeartBeat.swift */; };
 		002581F6248BF07700996809 /* StompFrameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581F5248BF07700996809 /* StompFrameBuilder.swift */; };
+		002581F8248C016F00996809 /* HeaderSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581F7248C016F00996809 /* HeaderSet.swift */; };
+		002581FA248C146000996809 /* RawHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002581F9248C146000996809 /* RawHeader.swift */; };
 		00B281B62484362400BA087A /* SendFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B52484362400BA087A /* SendFrame.swift */; };
 		00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B281B724857F3C00BA087A /* SubscribeFrame.swift */; };
 		00B281C1248580A400BA087A /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B281C0248580A400BA087A /* TSKit_Core.framework */; };
@@ -36,7 +38,6 @@
 		00F6812A2483D7B00026E9A2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F681292483D7B00026E9A2 /* Command.swift */; };
 		00F6812E2483DC420026E9A2 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6812D2483DC420026E9A2 /* Client.swift */; };
 		00F68131248401130026E9A2 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F68130248401130026E9A2 /* Starscream.framework */; };
-		00F68135248403DD0026E9A2 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F68134248403DD0026E9A2 /* Header.swift */; };
 		00F6813824840DC90026E9A2 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F68130248401130026E9A2 /* Starscream.framework */; };
 		00F6813B24840E990026E9A2 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00F68130248401130026E9A2 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F68142248411C40026E9A2 /* String+OctetLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F68141248411C40026E9A2 /* String+OctetLength.swift */; };
@@ -86,6 +87,8 @@
 		002581EE248BE78600996809 /* Stomp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stomp.swift; sourceTree = "<group>"; };
 		002581F3248BECC400996809 /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		002581F5248BF07700996809 /* StompFrameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompFrameBuilder.swift; sourceTree = "<group>"; };
+		002581F7248C016F00996809 /* HeaderSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSet.swift; sourceTree = "<group>"; };
+		002581F9248C146000996809 /* RawHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawHeader.swift; sourceTree = "<group>"; };
 		00B281B52484362400BA087A /* SendFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFrame.swift; sourceTree = "<group>"; };
 		00B281B724857F3C00BA087A /* SubscribeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFrame.swift; sourceTree = "<group>"; };
 		00B281C0248580A400BA087A /* TSKit_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TSKit_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +104,6 @@
 		00F681292483D7B00026E9A2 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		00F6812D2483DC420026E9A2 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		00F68130248401130026E9A2 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		00F68134248403DD0026E9A2 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		00F68141248411C40026E9A2 /* String+OctetLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+OctetLength.swift"; sourceTree = "<group>"; };
 		00F68144248412240026E9A2 /* AnyFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFrame.swift; sourceTree = "<group>"; };
 		00F6814C248415A00026E9A2 /* ConnectFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFrame.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				002581E6248BC4AC00996809 /* StompEncoder.swift */,
 				002581EA248BDFEC00996809 /* StompDecoder.swift */,
 				002581EC248BE00900996809 /* RawFrame.swift */,
+				002581F9248C146000996809 /* RawHeader.swift */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -246,8 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				00F681292483D7B00026E9A2 /* Command.swift */,
-				00F68134248403DD0026E9A2 /* Header.swift */,
 				002581F3248BECC400996809 /* HeartBeat.swift */,
+				002581F7248C016F00996809 /* HeaderSet.swift */,
 			);
 			path = Fragments;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				002581DD248A940A00996809 /* MessageFrame.swift in Sources */,
 				002581D9248A585100996809 /* ConnectedFrame.swift in Sources */,
 				002581F4248BECC500996809 /* HeartBeat.swift in Sources */,
+				002581FA248C146000996809 /* RawHeader.swift in Sources */,
 				002581E7248BC4AC00996809 /* StompEncoder.swift in Sources */,
 				002581ED248BE00900996809 /* RawFrame.swift in Sources */,
 				002581CC248586DB00996809 /* AcknowledgeFrame.swift in Sources */,
@@ -388,12 +392,12 @@
 				00B281B824857F3C00BA087A /* SubscribeFrame.swift in Sources */,
 				002581D02485883300996809 /* BeginFrame.swift in Sources */,
 				002581DF248A945000996809 /* ErrorFrame.swift in Sources */,
-				00F68135248403DD0026E9A2 /* Header.swift in Sources */,
 				00B281B62484362400BA087A /* SendFrame.swift in Sources */,
 				00F68145248412240026E9A2 /* AnyFrame.swift in Sources */,
 				002581DB248A93DD00996809 /* ReceiptFrame.swift in Sources */,
 				002581CE2485876100996809 /* NotAcknowledgeFrame.swift in Sources */,
 				002581D42485889300996809 /* AbortFrame.swift in Sources */,
+				002581F8248C016F00996809 /* HeaderSet.swift in Sources */,
 				00F6812E2483DC420026E9A2 /* Client.swift in Sources */,
 				002581E9248BDE6B00996809 /* CustomServerFrame.swift in Sources */,
 			);

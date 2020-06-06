@@ -5,8 +5,14 @@ class StompEncoderTests: XCTestCase {
     
     private var encoder: StompEncoder!
     
+    private let builder = StompFrameBuilder()
+    
     override func setUp() {
         encoder = .init()
+    }
+    
+    override func tearDown() {
+        builder.reset()
     }
 }
 
@@ -14,18 +20,28 @@ class StompEncoderTests: XCTestCase {
 extension StompEncoderTests {
     
     func testConnectFrameEncoding() {
-        let raw = encoder.encode(ConnectFrame(acceptedVersion: ["1.1", "1.2"], host: "somewhere"))
-        XCTAssertEqual(raw, ["CONNECT",
-                            "accept-version:1.1,1.2",
-                            "host:somewhere"].joined(separator: "\n"))
+        let raw = encoder.encode(ConnectFrame(acceptedVersion: ["1.1", "1.2"],
+                                              host: "somewhere",
+                                              heartBeat: .init(guaranteed: 10, expected: 20),
+                                              login: "mylogin",
+                                              passcode: "securepass"))
+        
+        XCTAssertEqual(raw, builder.command(.connect)
+                                   .header(.acceptVersion, value: "1.1,1.2")
+                                   .header(.heartBeat, value: "10,20")
+                                   .header(.host, value: "somewhere")
+                                   .header(.login, value: "mylogin")
+                                   .header(.passcode, value: "securepass")
+                                   .make())
     }
     
     func testDisonnectFrameEncoding() {
         let raw = encoder.encode(DisconnectFrame(receipt: "1",
                                                  additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["DISCONNECT",
-                             "custom:yes",
-                             "receipt:1"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.disconnect)
+                                   .header(.receipt, value: "1")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testSendFrameEncoding() {
@@ -37,15 +53,17 @@ extension StompEncoderTests {
                                            receipt: "1",
                                            transaction: "2",
                                            additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["SEND",
-                             "content-length:\(message.octetCount)",
-                             "content-type:text/plain",
-                             "custom:yes",
-                             "destination:to server",
-                             "receipt:1",
-                             "transaction:2",
-                             "",
-                             message].joined(separator: "\n"))
+        
+        
+        XCTAssertEqual(raw, builder.command(.send)
+                                   .header(.contentLength, value: "\(message.octetCount)")
+                                   .header(.contentType, value: "text/plain")
+                                   .header(.destination, value: "to server")
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .message(message)
+                                   .make())
     }
     
     func testSubscribeFrameEncoding() {
@@ -54,22 +72,26 @@ extension StompEncoderTests {
                                                 acknowledge: .clientIndividual,
                                                 receipt: "1",
                                                 additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["SUBSCRIBE",
-                             "ack:client-individual",
-                             "custom:yes",
-                             "destination:to server",
-                             "id:2",
-                             "receipt:1"].joined(separator: "\n"))
+        
+        XCTAssertEqual(raw, builder.command(.subscribe)
+                                   .header(.ack, value: Stomp.Acknowledge.clientIndividual.rawValue)
+                                   .header(.destination, value: "to server")
+                                   .header(.id, value: "2")
+                                   .header(.receipt, value: "1")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testUnsubscribeFrameEncoding() {
         let raw = encoder.encode(UnsubscribeFrame(id: "2",
                                                   receipt: "1",
                                                   additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["UNSUBSCRIBE",
-                             "custom:yes",
-                             "id:2",
-                             "receipt:1"].joined(separator: "\n"))
+        
+        XCTAssertEqual(raw, builder.command(.unsubscribe)
+                                   .header(.id, value: "2")
+                                   .header(.receipt, value: "1")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testAcknowledgeFrameEncoding() {
@@ -77,11 +99,12 @@ extension StompEncoderTests {
                                                   transaction: "2",
                                                   receipt: "1",
                                                   additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["ACK",
-                             "custom:yes",
-                             "id:3",
-                             "receipt:1",
-                             "transaction:2"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.ack)
+                                   .header(.id, value: "3")
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testNotAcknowledgeFrameEncoding() {
@@ -89,40 +112,44 @@ extension StompEncoderTests {
                                                   transaction: "2",
                                                   receipt: "1",
                                                   additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["NACK",
-                             "custom:yes",
-                             "id:3",
-                             "receipt:1",
-                             "transaction:2"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.nack)
+                                   .header(.id, value: "3")
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testBeginFrameEncoding() {
         let raw = encoder.encode(BeginFrame(transaction: "2",
                                             receipt: "1",
                                             additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["BEGIN",
-                             "custom:yes",
-                             "receipt:1",
-                             "transaction:2"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.begin)
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testCommitFrameEncoding() {
         let raw = encoder.encode(CommitFrame(transaction: "2",
                                             receipt: "1",
                                             additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["COMMIT",
-                             "custom:yes",
-                             "receipt:1",
-                             "transaction:2"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.commit)
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
     
     func testAbortFrameEncoding() {
         let raw = encoder.encode(AbortFrame(transaction: "2",
                                             receipt: "1",
                                             additionalHeaders: [.custom(key: "custom", value: "yes")]))
-        XCTAssertEqual(raw, ["ABORT",
-                             "custom:yes",
-                             "receipt:1",
-                             "transaction:2"].joined(separator: "\n"))
+        XCTAssertEqual(raw, builder.command(.abort)
+                                   .header(.receipt, value: "1")
+                                   .header(.transaction, value: "2")
+                                   .customHeader(key: "custom", value: "yes")
+                                   .make())
     }
 }

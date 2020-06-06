@@ -83,9 +83,9 @@ extension Header {
                 case .passcode:
                     self = .passcode(value)
                 case .heartBeat:
-                    let bits = value.components(separatedBy: ",").compactMap({ Int($0) })
+                    let bits = value.components(separatedBy: ",").compactMap({ UInt($0) })
                     guard bits.count == 2 else { throw StompDecodingError.malformedHeader }
-                    self = .heartBeat(outgoingInterval: bits.first!, expectedInterval: bits.last!)
+                    self = .heartBeat(.init(expected: bits.first!, guaranteed: bits.last!))
                 case .version:
                     self = .version(version: value)
                 case .id:

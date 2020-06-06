@@ -2,7 +2,7 @@ enum Header: Hashable, CustomStringConvertible {
    
     case acceptVersion(_ versions: [String])
     
-    case heartBeat(outgoingInterval: Int, expectedInterval: Int)
+    case heartBeat(HeartBeat)
     
     case host(_ hostName: String)
     case destination(path: String)
@@ -57,7 +57,7 @@ enum Header: Hashable, CustomStringConvertible {
     var value: String {
         switch self {
             case .acceptVersion(let versions): return versions.joined(separator: ",")
-            case .heartBeat(let outgoing, let incoming): return "\(outgoing),\(incoming)"
+            case .heartBeat(let heartbeat): return "\(heartbeat.guaranteed),\(heartbeat.expected)"
             case .destination(let path): return path
             case .version(let version): return version
             case .subscription(let subId): return subId

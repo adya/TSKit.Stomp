@@ -1,5 +1,5 @@
 /// Commands that can be received from server.
-enum ServerCommand: CustomStringConvertible {
+enum ServerCommand: Equatable, CustomStringConvertible {
    
     case connected
     case message
@@ -20,7 +20,7 @@ enum ServerCommand: CustomStringConvertible {
 }
 
 /// Commands that can be sent to server.
-enum ClientCommand: CustomStringConvertible {
+enum ClientCommand: Equatable, CustomStringConvertible {
     
     case connect
     case stomp

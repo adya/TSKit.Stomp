@@ -60,7 +60,7 @@ final class StompContentBuilder {
         return self
     }
     
-    func message(_ message: String? = nil) -> StompContentBuilder {
+    func message(_ message: String) -> StompContentBuilder {
         frameBuilder.message = message
         return self
     }

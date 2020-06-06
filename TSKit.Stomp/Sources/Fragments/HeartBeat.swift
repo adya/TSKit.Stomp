@@ -1,7 +1,7 @@
 import Foundation
 
 /// Configuration of the heart-beating.
-struct HeartBeat {
+struct HeartBeat: Equatable {
     
     /// Number that represents what the sender of the frame can do (outgoing heart-beats):
     /// - `0` means it cannot send heart-beats;

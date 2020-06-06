@@ -25,7 +25,10 @@ final class StompDecoder {
             }
             
         }
-        
+        if !components.isEmpty {
+            // If there is more components that means there will be message which must be separated with blank line
+            components.removeFirst()
+        }
         let body = components.nonEmpty?.joined(separator: "\n")
         
         switch command {

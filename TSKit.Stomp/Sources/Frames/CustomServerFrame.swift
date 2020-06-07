@@ -1,6 +1,6 @@
 import Foundation
 
-struct CustomServerFrame: AnyServerFrame, AnyPayloadFrame {
+struct CustomServerFrame: AnyServerFrame {
     
     let command: ServerCommand
     

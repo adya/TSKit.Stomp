@@ -5,4 +5,6 @@ struct ErrorFrame: AnyServerFrame {
     /// Optional:
     /// - message
     let headers: HeaderSet
+    
+    let body: String?
 }

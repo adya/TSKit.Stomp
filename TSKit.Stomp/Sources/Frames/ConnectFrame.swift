@@ -1,12 +1,12 @@
 import TSKit_Core
 
-struct ConnectFrame: AnyClientFrame {
+public struct ConnectFrame: AnyClientFrame {
     
-    let command: ClientCommand = .connect
+    public let command: ClientCommand = .connect
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(acceptedVersion: [String] = Stomp.versions,
+    public init(acceptedVersion: [String] = Stomp.versions,
          host: String,
          heartBeat: HeartBeat? = nil,
          login: String? = nil,

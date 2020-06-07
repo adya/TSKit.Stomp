@@ -1,5 +1,5 @@
 /// Commands that can be received from server.
-enum ServerCommand: Equatable, CustomStringConvertible {
+public enum ServerCommand: Equatable, CustomStringConvertible {
    
     case connected
     case message
@@ -8,7 +8,7 @@ enum ServerCommand: Equatable, CustomStringConvertible {
     
     case custom(String)
     
-    var description: String {
+    public var description: String {
         switch self {
             case .connected: return String(describing: Stomp.ServerCommand.connected)
             case .message: return String(describing: Stomp.ServerCommand.message)
@@ -20,7 +20,7 @@ enum ServerCommand: Equatable, CustomStringConvertible {
 }
 
 /// Commands that can be sent to server.
-enum ClientCommand: Equatable, CustomStringConvertible {
+public enum ClientCommand: Equatable, CustomStringConvertible {
     
     case connect
     case stomp
@@ -39,7 +39,7 @@ enum ClientCommand: Equatable, CustomStringConvertible {
     
     case custom(String)
     
-    var description: String {
+    public var description: String {
         switch self {
             case .connect: return String(describing: Stomp.ClientCommand.connect)
             case .stomp: return String(describing: Stomp.ClientCommand.stomp)

@@ -1,7 +1,7 @@
 /// Namespace containing all STOMP terms.
-enum Stomp {}
+public enum Stomp {}
 
-extension Stomp {
+public extension Stomp {
     
     /// Supported revisions of STOMP.
     static let versions = ["1.2"]
@@ -57,7 +57,7 @@ extension Stomp {
         case ack
         case nack
         
-        var description: String {
+        public var description: String {
             rawValue.uppercased()
         }
     }
@@ -69,7 +69,7 @@ extension Stomp {
         case receipt
         case error
         
-        var description: String {
+        public var description: String {
             rawValue.uppercased()
         }
     }

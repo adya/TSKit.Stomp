@@ -1,6 +1,6 @@
 import TSKit_Core
 
-struct SendFrame: AnyClientFrame, AnyPayloadFrame {
+struct SendFrame: AnyClientFrame {
    
     let command: ClientCommand = .send
     

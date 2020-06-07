@@ -4,25 +4,27 @@ import Starscream
 public protocol AnyStompServiceDelegate: class {
     
     func serviceDidConnect(_ service: StompService)
-    
-    func service(_ service: StompService, didReceive error: Error)
-    
-    func service(_ service: StompService, didReceive data: Data)
-    
-    func service(_ service: StompService, didReceive message: String)
+        
+    func service(_ service: StompService, didReceive frame: AnyServerFrame)
 }
 
-public class StompService {
+public final class StompService {
     
     public weak var delegate: AnyStompServiceDelegate?
     
     let socket: WebSocket
     
-    init(url: URL) {
+    private let decoder = StompDecoder()
+    
+    private let encoder = StompEncoder()
+    
+    private var isConnected = false
+    
+    public init(url: URL) {
         socket = WebSocket(request: URLRequest(url: url))
     }
     
-    init(request: URLRequest) {
+    public init(request: URLRequest) {
         socket = WebSocket(request: request)
     }
     
@@ -34,8 +36,8 @@ public class StompService {
         socket.disconnect()
     }
     
-    private func sendFrame(_ frame: Frame) {
-        
+    private func sendFrame(_ frame: AnyClientFrame) {
+        guard isConnected else { return }
     }
 }
 
@@ -43,25 +45,38 @@ extension StompService: WebSocketDelegate {
     
     public func didReceive(event: WebSocketEvent, client: WebSocket) {
         switch event {
-            case .connected(let t):
-            break
+            case .connected(let headers):
+                print("Connected with headers: \(headers)")
+                isConnected = true
+            
             case .disconnected(_, _):
-            break
+                isConnected = false
+            
             case .text(let text):
-            break
-            case .binary(let data):
-            break
-            case .pong(let payload):
-            break
-            case .ping(let payload):
-            break
-            case .error(let error):
-            break
-            case .viabilityChanged(let flag):
-            break
+                do {
+                    let frame = try decoder.decode(text)
+                    delegate?.service(self, didReceive: frame)
+                } catch {
+                    print("Sorry, no: \(error)")
+            }
+            
             case .reconnectSuggested(let flag):
-            break
-            case .cancelled: break
+                if flag {
+                    client.disconnect()
+                    client.connect()
+                }
+            
+            case .error(let error):
+                print(error as Any)
+            
+            case .viabilityChanged(let flag):
+                print("Viability changed to \(flag)") // Idk what to do here
+            
+            case .cancelled:
+                print("Cancelled event") // Idk what to do here
+            
+            case .binary: break // Not expecting data in STOMP
+            case .ping, .pong: break // Automatically responded.
         }
     }
 }

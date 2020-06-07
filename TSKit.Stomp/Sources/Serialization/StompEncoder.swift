@@ -8,7 +8,7 @@ final class StompEncoder {
                                           .map { $0.raw }
                                           .sorted()
         
-        if let frame = frame as? AnyPayloadFrame, let body = frame.body {
+        if let body = frame.body {
             result += ["", body]
         }
         

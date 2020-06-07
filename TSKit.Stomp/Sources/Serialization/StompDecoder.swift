@@ -33,7 +33,7 @@ final class StompDecoder {
         
         switch command {
             case .connected: return ConnectedFrame(headers: headers)
-            case .error: return ErrorFrame(headers: headers)
+            case .error: return ErrorFrame(headers: headers, body: body)
             case .receipt: return ReceiptFrame(headers: headers)
             case .message: return MessageFrame(headers: headers, body: body)
             case .custom(let command): return CustomServerFrame(command: command, headers: headers, body: body)

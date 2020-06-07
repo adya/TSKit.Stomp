@@ -62,14 +62,13 @@ extension StompDeccoderTests {
         var frame: AnyServerFrame!
         XCTAssertNoThrow(frame = try decoder.decode(raw))
         XCTAssertTrue(frame is MessageFrame)
-        guard let payload = frame as? AnyPayloadFrame else { return }
         XCTAssertEqual(frame.headers.subscription, "0")
         XCTAssertEqual(frame.headers.destination, "2")
         XCTAssertEqual(frame.headers.messageId, "3")
         XCTAssertEqual(frame.headers.acknowledge, Stomp.Acknowledge.clientIndividual)
         XCTAssertEqual(frame.headers.contentLength, message.octetCount)
         XCTAssertEqual(frame.headers.contentType, "text/plain")
-        XCTAssertEqual(payload.body, message)
+        XCTAssertEqual(frame.body, message)
     }
     
     func testErrorFrameDecoding() {
@@ -84,11 +83,10 @@ extension StompDeccoderTests {
         var frame: AnyServerFrame!
         XCTAssertNoThrow(frame = try decoder.decode(raw))
         XCTAssertTrue(frame is ErrorFrame)
-        guard let payload = frame as? AnyPayloadFrame else { return }
         XCTAssertEqual(frame.headers.message, "Something wrong")
         XCTAssertEqual(frame.headers.receiptId, "2")
         XCTAssertEqual(frame.headers.contentLength, details.octetCount)
         XCTAssertEqual(frame.headers.contentType, "text/plain")
-        XCTAssertEqual(payload.body, details)
+        XCTAssertEqual(frame.body, details)
     }
 }

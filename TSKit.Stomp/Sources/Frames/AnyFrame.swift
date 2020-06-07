@@ -1,6 +1,8 @@
-protocol AnyFrame {
+public protocol AnyFrame {
     
     var headers: HeaderSet { get }
+    
+    var body: String? { get }
 }
 
 protocol AnyClientFrame: AnyFrame {
@@ -8,12 +10,13 @@ protocol AnyClientFrame: AnyFrame {
     var command: ClientCommand { get }
 }
 
-protocol AnyServerFrame: AnyFrame {
+public protocol AnyServerFrame: AnyFrame {
     
     var command: ServerCommand { get }
 }
 
-protocol AnyPayloadFrame: AnyFrame {
+// MARK: - Empty body default
+public extension AnyFrame {
     
-    var body: String? { get }
+    var body: String? { nil }
 }

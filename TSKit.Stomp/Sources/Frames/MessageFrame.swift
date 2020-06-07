@@ -1,4 +1,4 @@
-struct MessageFrame: AnyServerFrame, AnyPayloadFrame {
+struct MessageFrame: AnyServerFrame {
     
     let command: ServerCommand = .message
     

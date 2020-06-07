@@ -1,14 +1,13 @@
 import Foundation
 import TSKit_Core
 
-struct HeaderSet {
+public struct HeaderSet {
     
-    private(set) var headers: [Stomp.Header: String] = [:]
+    public private(set) var headers: [Stomp.Header: String] = [:]
     
+    public private(set) var customHeaders: [String: String] = [:]
     
-    private(set) var customHeaders: [String: String] = [:]
-    
-    var allHeaders: [String: String] {
+    public var allHeaders: [String: String] {
         transform(headers.map(key: { $0.0.rawValue },
                               value: { $0.1 })) { headers in
             customHeaders.forEach { (key, value) in
@@ -17,21 +16,23 @@ struct HeaderSet {
         }
     }
     
-    mutating func set(_ value: String, for header: Stomp.Header) {
+    public init() {}
+    
+    public mutating func set(_ value: String, for header: Stomp.Header) {
         headers[header] = value
     }
     
-    mutating func remove(_ header: Stomp.Header) {
+    public mutating func remove(_ header: Stomp.Header) {
         headers.removeValue(forKey: header)
     }
     
-    func contains(_ header: Stomp.Header) -> Bool {
+    public func contains(_ header: Stomp.Header) -> Bool {
         headers[header] != nil
     }
 }
 
 // MARK: - Custom headers
-extension HeaderSet {
+public extension HeaderSet {
     
     func header(named name: String) -> String? {
         if let stompHeader = Stomp.Header(rawValue: name.lowercased()) {
@@ -67,7 +68,7 @@ extension HeaderSet {
 }
 
 // MARK: - Accessors
-extension HeaderSet {
+public extension HeaderSet {
     
     var contentLength: Int? {
         get { headers[.contentLength].flatMap(Int.init) }
@@ -173,7 +174,7 @@ extension HeaderSet {
     }
 }
 
-extension HeaderSet {
+public extension HeaderSet {
     
     mutating func formUnion(_ other: HeaderSet) {
         other.allHeaders.filter { !containsHeader(named: $0.key) }

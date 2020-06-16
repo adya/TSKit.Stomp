@@ -1,12 +1,12 @@
 import TSKit_Core
 
-struct DisconnectFrame: AnyClientFrame {
+public struct DisconnectFrame: AnyClientFrame {
     
-    let command: ClientCommand = .disconnect
+    public let command: ClientCommand = .disconnect
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(receipt: String? = nil,
+    public init(receipt: String? = nil,
          additionalHeaders: HeaderSet? = nil) {
         self.headers = transform(HeaderSet()) { headers in
             headers.receipt = receipt

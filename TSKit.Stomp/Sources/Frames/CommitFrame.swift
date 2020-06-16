@@ -1,14 +1,14 @@
 import TSKit_Core
 
-struct CommitFrame: AnyClientFrame {
+public struct CommitFrame: AnyClientFrame {
     
-    let command: ClientCommand = .commit
+    public let command: ClientCommand = .commit
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(transaction: String,
-         receipt: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(transaction: String,
+                receipt: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         
         self.headers = transform(HeaderSet()) { headers in
             headers.transaction = transaction

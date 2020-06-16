@@ -1,6 +1,6 @@
-struct ConnectedFrame: AnyServerFrame {
+public struct ConnectedFrame: AnyServerFrame {
     
-    let command: ServerCommand = .connected
+    public let command: ServerCommand = .connected
     
     /// Required:
     /// - version
@@ -8,5 +8,5 @@ struct ConnectedFrame: AnyServerFrame {
     /// - server
     /// - heart-beat
     /// - session
-    let headers: HeaderSet
+    public let headers: HeaderSet
 }

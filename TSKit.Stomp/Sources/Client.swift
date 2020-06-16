@@ -4,8 +4,21 @@ import Starscream
 public protocol AnyStompServiceDelegate: class {
     
     func serviceDidConnect(_ service: StompService)
-        
+    
+    func serviceDidCancelConnection(_ service: StompService)
+    
+    func service(_ service: StompService, didFailWith error: Error?)
+    
     func service(_ service: StompService, didReceive frame: AnyServerFrame)
+}
+
+public extension AnyStompServiceDelegate {
+    
+    func serviceDidConnect(_ service: StompService) {}
+    
+    func serviceDidCancelConnection(_ service: StompService) {}
+    
+    func service(_ service: StompService, didFailWith error: Error?) {}
 }
 
 public final class StompService {
@@ -19,13 +32,15 @@ public final class StompService {
     private let encoder = StompEncoder()
     
     private var isConnected = false
-    
+        
     public init(url: URL) {
         socket = WebSocket(request: URLRequest(url: url))
+        socket.delegate = self
     }
     
     public init(request: URLRequest) {
         socket = WebSocket(request: request)
+        socket.delegate = self
     }
     
     public func connect() {
@@ -36,8 +51,9 @@ public final class StompService {
         socket.disconnect()
     }
     
-    private func sendFrame(_ frame: AnyClientFrame) {
+    public func sendFrame(_ frame: AnyClientFrame) {
         guard isConnected else { return }
+        socket.write(string: encoder.encode(frame))
     }
 }
 
@@ -48,6 +64,7 @@ extension StompService: WebSocketDelegate {
             case .connected(let headers):
                 print("Connected with headers: \(headers)")
                 isConnected = true
+                delegate?.serviceDidConnect(self)
             
             case .disconnected(_, _):
                 isConnected = false
@@ -67,12 +84,16 @@ extension StompService: WebSocketDelegate {
                 }
             
             case .error(let error):
+                isConnected = false
+                delegate?.service(self, didFailWith: error)
+                client.connect()
                 print(error as Any)
             
             case .viabilityChanged(let flag):
                 print("Viability changed to \(flag)") // Idk what to do here
             
             case .cancelled:
+                isConnected = false
                 print("Cancelled event") // Idk what to do here
             
             case .binary: break // Not expecting data in STOMP

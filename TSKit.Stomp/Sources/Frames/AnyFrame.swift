@@ -5,7 +5,7 @@ public protocol AnyFrame {
     var body: String? { get }
 }
 
-protocol AnyClientFrame: AnyFrame {
+public protocol AnyClientFrame: AnyFrame {
     
     var command: ClientCommand { get }
 }

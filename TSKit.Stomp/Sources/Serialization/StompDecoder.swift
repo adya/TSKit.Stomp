@@ -8,7 +8,7 @@ final class StompDecoder {
             throw StompDecodingError.unexpectedEndOfFrame
         }
         
-        let command = try ServerCommand(rawValue: components.removeFirst())
+        let command = try ServerCommand(rawValue: components.removeFirst().lowercased())
         
         var headers = HeaderSet()
         while !components.isEmpty, !components.first!.isEmpty {

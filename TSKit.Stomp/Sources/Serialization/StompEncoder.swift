@@ -7,11 +7,11 @@ final class StompEncoder {
         result += frame.headers.allHeaders.map(RawHeader.init)
                                           .map { $0.raw }
                                           .sorted()
-        
+        result += ["\n"]
         if let body = frame.body {
-            result += ["", body]
+            result += [body]
         }
         
-        return result.joined(separator: "\n")
+        return result.joined(separator: "\n").appending("\0")
     }
 }

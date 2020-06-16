@@ -1,17 +1,17 @@
 import TSKit_Core
 
-typealias AckFrame = AcknowledgeFrame
+public typealias AckFrame = AcknowledgeFrame
 
-struct AcknowledgeFrame: AnyClientFrame {
+public struct AcknowledgeFrame: AnyClientFrame {
     
-    let command: ClientCommand = .ack
+    public let command: ClientCommand = .ack
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(id: String,
-         transaction: String? = nil,
-         receipt: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(id: String,
+                transaction: String? = nil,
+                receipt: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.headers = transform(HeaderSet()) { headers in
             headers.id = id
             headers.transaction = transaction

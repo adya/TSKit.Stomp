@@ -1,6 +1,6 @@
-struct MessageFrame: AnyServerFrame {
+public struct MessageFrame: AnyServerFrame {
     
-    let command: ServerCommand = .message
+    public let command: ServerCommand = .message
     
     /// Required:
     /// - cotent-length
@@ -10,7 +10,7 @@ struct MessageFrame: AnyServerFrame {
     /// - subscription
     /// Optional:
     /// - ack
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    let body: String?
+    public let body: String?
 }

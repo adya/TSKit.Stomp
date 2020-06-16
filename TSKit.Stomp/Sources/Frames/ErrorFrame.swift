@@ -1,10 +1,10 @@
-struct ErrorFrame: AnyServerFrame {
+public struct ErrorFrame: AnyServerFrame {
     
-    let command: ServerCommand = .error
+    public let command: ServerCommand = .error
     
     /// Optional:
     /// - message
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    let body: String?
+    public let body: String?
 }

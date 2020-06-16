@@ -1,14 +1,14 @@
 import TSKit_Core
 
-struct UnsubscribeFrame: AnyClientFrame {
+public struct UnsubscribeFrame: AnyClientFrame {
     
-    let command: ClientCommand = .unsubscribe
+    public let command: ClientCommand = .unsubscribe
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(id: String,
-         receipt: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(id: String,
+                receipt: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.headers = transform(HeaderSet()) { headers in
             headers.id = id
             headers.receipt = receipt

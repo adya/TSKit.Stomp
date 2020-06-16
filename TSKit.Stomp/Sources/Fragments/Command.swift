@@ -14,7 +14,7 @@ public enum ServerCommand: Equatable, CustomStringConvertible {
             case .message: return String(describing: Stomp.ServerCommand.message)
             case .receipt: return String(describing: Stomp.ServerCommand.receipt)
             case .error: return String(describing: Stomp.ServerCommand.error)
-            case .custom(let command): return command.uppercased()
+            case .custom(let command): return command
         }
     }
 }
@@ -52,7 +52,7 @@ public enum ClientCommand: Equatable, CustomStringConvertible {
             case .abort: return String(describing: Stomp.ClientCommand.abort)
             case .ack: return String(describing: Stomp.ClientCommand.ack)
             case .nack: return String(describing: Stomp.ClientCommand.nack)
-            case .custom(let command): return command.uppercased()
+            case .custom(let command): return command
         }
     }
 }

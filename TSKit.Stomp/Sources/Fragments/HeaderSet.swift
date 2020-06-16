@@ -70,6 +70,48 @@ public extension HeaderSet {
 // MARK: - Accessors
 public extension HeaderSet {
     
+    init(contentLength: Int? = nil,
+         contentType: String? = nil,
+         acceptVersion: [String]? = nil,
+         host: String? = nil,
+         login: String? = nil,
+         passcode: String? = nil,
+         heartBeat: HeartBeat? = nil,
+         version: String? = nil,
+         id: String? = nil,
+         session: String? = nil,
+         server: String?  = nil,
+         destination: String? = nil,
+         transaction: String? = nil,
+         acknowledge: Stomp.Acknowledge? = nil,
+         subscription: String? = nil,
+         messageId: String? = nil,
+         message: String? = nil,
+         receiptId: String? = nil,
+         receipt: String? = nil,
+         customHeaders: [String: String]? = nil) {
+        self.contentLength = contentLength
+        self.contentType = contentType
+        self.acceptVersion = acceptVersion
+        self.host = host
+        self.login = login
+        self.passcode = passcode
+        self.heartBeat = heartBeat
+        self.version = version
+        self.id = id
+        self.session = session
+        self.server = server
+        self.destination = destination
+        self.transaction = transaction
+        self.acknowledge = acknowledge
+        self.subscription = subscription
+        self.messageId = messageId
+        self.message = message
+        self.receiptId = receiptId
+        self.receipt = receipt
+        self.customHeaders = customHeaders ?? [:]
+    }
+    
     var contentLength: Int? {
         get { headers[.contentLength].flatMap(Int.init) }
         set { headers[.contentLength] = newValue.flatMap(String.init(describing:)) }

@@ -1,14 +1,14 @@
 import TSKit_Core
 
-struct BeginFrame: AnyClientFrame {
+public struct BeginFrame: AnyClientFrame {
     
-    let command: ClientCommand = .begin
+    public let command: ClientCommand = .begin
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(transaction: String,
-         receipt: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(transaction: String,
+                receipt: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.headers = transform(HeaderSet()) { headers in
             headers.transaction = transaction
             headers.receipt = receipt

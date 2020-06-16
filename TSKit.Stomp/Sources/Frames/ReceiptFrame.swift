@@ -1,8 +1,8 @@
-struct ReceiptFrame: AnyServerFrame {
+public struct ReceiptFrame: AnyServerFrame {
     
-    let command: ServerCommand = .receipt
+    public let command: ServerCommand = .receipt
     
     /// Required:
     /// - receipt-id
-    let headers: HeaderSet
+    public let headers: HeaderSet
 }

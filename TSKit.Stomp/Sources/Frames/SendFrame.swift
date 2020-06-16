@@ -1,12 +1,12 @@
 import TSKit_Core
 
-struct SendFrame: AnyClientFrame {
-   
-    let command: ClientCommand = .send
+public struct SendFrame: AnyClientFrame {
     
-    let headers: HeaderSet
+    public let command: ClientCommand = .send
     
-    let body: String?
+    public let headers: HeaderSet
+    
+    public let body: String?
     
     private init(bodyOrNil body: String?,
                  destination: String,
@@ -18,7 +18,7 @@ struct SendFrame: AnyClientFrame {
         self.body = body
         self.headers = transform(HeaderSet()) { headers in
             if let body = body {
-                headers.contentLength = contentLength ?? body.octetCount
+                headers.contentLength = (contentLength ?? body.octetCount + 1)
             }
             headers.destination = destination
             headers.contentType = contentType
@@ -28,13 +28,13 @@ struct SendFrame: AnyClientFrame {
         }
     }
     
-    init(body: String,
-         destination: String,
-         contentLength: Int? = nil,
-         contentType: String? = nil,
-         receipt: String? = nil,
-         transaction: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(body: String,
+                destination: String,
+                contentLength: Int? = nil,
+                contentType: String? = nil,
+                receipt: String? = nil,
+                transaction: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.init(bodyOrNil: body,
                   destination: destination,
                   contentLength: contentLength,
@@ -44,10 +44,10 @@ struct SendFrame: AnyClientFrame {
                   additionalHeaders: additionalHeaders)
     }
     
-    init(destination: String,
-         receipt: String? = nil,
-         transaction: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(destination: String,
+                receipt: String? = nil,
+                transaction: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.init(bodyOrNil: nil,
                   destination: destination,
                   contentLength: nil,

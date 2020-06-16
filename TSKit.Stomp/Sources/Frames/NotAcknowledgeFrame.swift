@@ -1,17 +1,17 @@
 import TSKit_Core
 
-typealias NackFrame = NotAcknowledgeFrame
+public typealias NackFrame = NotAcknowledgeFrame
 
-struct NotAcknowledgeFrame: AnyClientFrame {
+public struct NotAcknowledgeFrame: AnyClientFrame {
     
-    let command: ClientCommand = .nack
+    public let command: ClientCommand = .nack
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    init(id: String,
-         transaction: String? = nil,
-         receipt: String? = nil,
-         additionalHeaders: HeaderSet? = nil) {
+    public init(id: String,
+                transaction: String? = nil,
+                receipt: String? = nil,
+                additionalHeaders: HeaderSet? = nil) {
         self.headers = transform(HeaderSet()) { headers in
             headers.id = id
             headers.transaction = transaction

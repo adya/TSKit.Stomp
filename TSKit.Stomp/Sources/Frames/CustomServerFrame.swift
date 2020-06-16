@@ -1,15 +1,15 @@
 import Foundation
 
-struct CustomServerFrame: AnyServerFrame {
+public struct CustomServerFrame: AnyServerFrame {
     
-    let command: ServerCommand
+    public let command: ServerCommand
     
-    let headers: HeaderSet
+    public let headers: HeaderSet
     
-    let body: String?
+    public let body: String?
     
     init(command: String, headers: HeaderSet, body: String? = nil) {
-        self.command = .custom(command.uppercased())
+        self.command = .custom(command)
         self.headers = headers
         self.body = body
     }

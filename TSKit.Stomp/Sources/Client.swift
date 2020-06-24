@@ -33,6 +33,8 @@ public final class StompService {
     
     private var isConnected = false
         
+    private var timer: Timer?
+    
     public init(url: URL) {
         socket = WebSocket(request: URLRequest(url: url))
         socket.delegate = self
@@ -48,12 +50,19 @@ public final class StompService {
     }
     
     public func disconnect() {
+        stopHeartBeat()
+        sendFrame(DisconnectFrame())
         socket.disconnect()
     }
     
     public func sendFrame(_ frame: AnyClientFrame) {
         guard isConnected else { return }
         socket.write(string: encoder.encode(frame))
+    }
+    
+    private func stopHeartBeat() {
+        timer?.invalidate()
+        timer = nil
     }
 }
 
@@ -68,18 +77,26 @@ extension StompService: WebSocketDelegate {
             
             case .disconnected(_, _):
                 isConnected = false
+                stopHeartBeat()
             
             case .text(let text):
                 do {
                     let frame = try decoder.decode(text)
+                    if let frame = frame as? ConnectedFrame, let heartBeat = frame.headers.heartBeat, heartBeat.expected > 0 {
+                        // Send heart-beat accordingly
+                        timer = Timer.scheduledTimer(withTimeInterval: .init(heartBeat.expected),
+                                                     repeats: true,
+                                                     block: { [weak client] _ in
+                            client?.write(data: "\n".data(using: .utf8)!)
+                        })
+                    }
                     delegate?.service(self, didReceive: frame)
                 } catch {
-                    print("Sorry, no: \(error)")
-            }
+                    print("\(Date()): Not a valid frame: '\(text)'")
+                }
             
             case .reconnectSuggested(let flag):
                 if flag {
-                    client.disconnect()
                     client.connect()
                 }
             

@@ -36,7 +36,6 @@ final class StompDecoder {
             case .error: return ErrorFrame(headers: headers, body: body)
             case .receipt: return ReceiptFrame(headers: headers)
             case .message: return MessageFrame(headers: headers, body: body)
-            case .custom(let command): return CustomServerFrame(command: command, headers: headers, body: body)
         }
     }
 }
@@ -46,6 +45,8 @@ enum StompDecodingError: Error {
     case unexpectedEndOfFrame
     
     case malformedHeader
+    
+    case unknownCommand
 }
 
 extension ServerCommand {
@@ -60,7 +61,7 @@ extension ServerCommand {
                 case .error: self = .error
             }
         } else {
-            self = .custom(rawValue)
+            throw StompDecodingError.unknownCommand
         }
     }
 }

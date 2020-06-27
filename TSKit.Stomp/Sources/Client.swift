@@ -84,16 +84,14 @@ extension StompService: WebSocketDelegate {
                     let frame = try decoder.decode(text)
                     if let frame = frame as? ConnectedFrame, let heartBeat = frame.headers.heartBeat, heartBeat.expected > 0 {
                         // Send heart-beat accordingly
-                        timer = Timer.scheduledTimer(withTimeInterval: .init(heartBeat.expected),
+                        timer = Timer.scheduledTimer(withTimeInterval: .init(heartBeat.expected / 1000),
                                                      repeats: true,
                                                      block: { [weak client] _ in
                             client?.write(data: "\n".data(using: .utf8)!)
                         })
                     }
                     delegate?.service(self, didReceive: frame)
-                } catch {
-                    print("\(Date()): Not a valid frame: '\(text)'")
-                }
+                } catch {}
             
             case .reconnectSuggested(let flag):
                 if flag {

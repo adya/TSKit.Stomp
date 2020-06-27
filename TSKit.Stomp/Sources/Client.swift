@@ -5,8 +5,8 @@ public protocol AnyStompServiceDelegate: class {
     
     func serviceDidConnect(_ service: StompService)
     
-    func serviceDidCancelConnection(_ service: StompService)
-    
+    func serviceDidDisconnect(_ service: StompService)
+        
     func service(_ service: StompService, didFailWith error: Error?)
     
     func service(_ service: StompService, didReceive frame: AnyServerFrame)
@@ -16,7 +16,7 @@ public extension AnyStompServiceDelegate {
     
     func serviceDidConnect(_ service: StompService) {}
     
-    func serviceDidCancelConnection(_ service: StompService) {}
+    func serviceDidDisconnect(_ service: StompService) {}
     
     func service(_ service: StompService, didFailWith error: Error?) {}
 }
@@ -78,6 +78,7 @@ extension StompService: WebSocketDelegate {
             case .disconnected(_, _):
                 isConnected = false
                 stopHeartBeat()
+                delegate?.serviceDidDisconnect(self)
             
             case .text(let text):
                 do {
